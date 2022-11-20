@@ -13,8 +13,9 @@ schema = flight_request_schema()
 
 data_path = './data/flights.csv'
 
+
 class OriginAPI(Resource):
-    def get(self):
+    def get(self, request):
         data = pd.read_csv(data_path)
         data = data.to_dict()
         response = {
@@ -22,14 +23,31 @@ class OriginAPI(Resource):
             'destination': []
         }
         for index in data['origin']:
-            if data['origin'][index] == 'BNA' or data['origin_full_name'] == 'Nashville':
+            if data['origin'][index] == request or data['origin_full_name'] == request:
                 response['origin'].append(data['origin'][index])
                 response['destination'].append(data['destination'][index])
 
         return response
 
 
+class DestinationAPI(Resource):
+    def get(self, request):
+        data = pd.read_csv(data_path)
+        data = data.to_dict()
+        response = {
+            'destination': [],
+            'origin': []
+        }
+        for index in data['destination']:
+            if data['destination'][index] == request or data['destination_full_name'] == request:
+                response['destination'].append(data['destination'][index])
+                response['origin'].append(data['origin'][index])
+
+        return response
+
 api.add_resource(OriginAPI, '/origin')
+api.add_resource(DestinationAPI, '/destination')
+
 
 if __name__ == "__main__":
     app.run()
