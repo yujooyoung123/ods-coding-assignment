@@ -20,15 +20,14 @@ data_path = './data/flights.csv'
 def request(request, request_type):
     data = pd.read_csv(data_path)
     data = data.to_dict()
-    response = {
-        'origin': [],
-        'destination': []
-    }
+    response = []
 
     for index in data['origin']:
         if data[request_type][index] == request or data[request_type + '_full_name'] == request:
-            response['origin'].append(data['origin'][index])
-            response['destination'].append(data['destination'][index])
+            response.append({
+                'origin': data['origin'][index],
+                'destination': data['destination'][index]
+            })
 
     # if request_type == 'destination':
     #     response = dict(reversed(response.items()))
@@ -43,19 +42,16 @@ def autosuggest():
     data = pd.read_csv(data_path)
     data = data.to_dict()
 
-    response = [{
-    'origin': [],
-    'origin_full_name': [],
-    'destination': [],
-    'destination_full_name': []
-    }]
+    response = []
 
     for index in data['origin']:
-        response[0]['origin'].append(data['origin'][index])
-        response[0]['origin_full_name'].append(data['origin_full_name'][index])
-        response[0]['destination'].append(data['destination'][index])
-        response[0]['destination_full_name'].append(data['destination_full_name'][index])    
+        response.append({
+            'origin': data['origin'][index],
+            'origin_full_name': data['origin_full_name'][index],
+            'destination': data['destination'][index],
+            'destination_full_name': data['destination_full_name'][index]
+        })
 
-    response = json.dumps(response, indent = 4)
+    response = json.dumps(response, indent = 3)
 
     return response
