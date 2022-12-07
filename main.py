@@ -23,14 +23,13 @@ def request(request, request_type):
     response = []
 
     for index in data['origin']:
-        if data[request_type][index] == request or data[request_type + '_full_name'] == request:
+        if data[request_type][index] == request or data[request_type + '_full_name'][index] == request:
             response.append({
                 'origin': data['origin'][index],
                 'destination': data['destination'][index]
             })
 
-    # if request_type == 'destination':
-    #     response = dict(reversed(response.items()))
+    print(data['origin_full_name'][3].upper())
 
     response = json.dumps(response, indent = 3)
 
@@ -45,13 +44,14 @@ def autosuggest():
     response = []
 
     for index in data['origin']:
-        response.append({
-            'origin': data['origin'][index],
-            'origin_full_name': data['origin_full_name'][index],
-            'destination': data['destination'][index],
-            'destination_full_name': data['destination_full_name'][index]
-        })
+        response.append(str(data['origin'][index]))
+        response.append(str(data['origin_full_name'][index]))
+        response.append(str(data['destination'][index]))
+        response.append(str(data['destination_full_name'][index]))
 
-    response = json.dumps(response, indent = 3)
+    response = [*set(response)]
+    response.sort(key=lambda x : len(x))
+    response = json.dumps(response, indent = 0)
 
     return response
+

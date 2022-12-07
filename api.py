@@ -22,6 +22,7 @@ class OriginAPI(Resource):
             'origin': [],
             'destination': []
         }
+        print(type(request))
         for index in data['origin']:
             if data['origin'][index] == request or data['origin_full_name'] == request:
                 response['origin'].append(data['origin'][index])
