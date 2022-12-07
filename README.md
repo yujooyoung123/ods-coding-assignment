@@ -13,26 +13,58 @@ for Nashville (BNA), a user should be able to select flights to/from Nashville b
 
 3. Provide two RESTful endpoints supporting the functionality listed in steps 1 and 2.
 
-## Bonus Points (Not required)
-1. Unit tests are created for your code and test the main logic you've put together, e.g. auto-suggest returns BNA when Nashville is the search term.
-
-
 ## Datasource
 
 A zipped CSV file of flights is available in /data/flights.csv. Each row in the CSV file represents a flight.
 
-## Implementation
+## Tech Stack
 
-**Preferred tech stack:**
-* Backend: Python, node.js, SpringBoot, etc.
-* Angular or other frontend framework (ReactJS, vue.js, etc.)
-* Docker (If you'd like to host it, try hosting it on Firebase, Netlify since there's a free tier with a small db setup)
+This application uses an Angular frontend framework connected to a Python backend in order to allow the user to search for flights and return a table of flights depending on origin or destination. The frontend takes advantage of the Angular Material to display its components, and the python API uses fastAPI in order to fulfill requests.
 
-However, you may use other tech if you are more comfortable with something else. You can use any additional technologies/frameworks/DBs/libraries you would like to.
+## Install Requirements 
 
-**To submit your solution:** 
-* Clone this repo and push to a personal github repo and submit the link
-* Please update the README with how to run your app and your tech stack used and anything else that the reviewer may need to get started with your code
-* Return your solution within 3 business days, unless other directions provided.
-* Feel free to ask questions at any time.
-* Have fun with it! Your application can be as simple or complex as possible.
+### API
+
+To install requirements for the API, create a virtual environment and activate it, then install the requirements with:
+
+```
+pip install -r requirements.txt
+```
+
+### Frontend
+
+In order to run the frontend Angular application, you must have Node and npm
+
+Start by install npm with 
+
+```
+npm install
+```
+
+and add the Angular framework packages and Angular Material packages with 
+
+```
+npm install @angular/cli 
+```
+
+and 
+
+```
+ng add @angular/material
+```
+
+## Running the Application
+
+To start the backend, navigate to the api directory and run the command:
+
+```
+uvicorn api:app --reload
+```
+
+To start the frontend, navigate to the flights-frontend directory and run the command:
+
+```
+ng s
+```
+
+By default, the API will be running on localhost:8000 while the frontend will be running on localhost:4200. 
