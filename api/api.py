@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-data_path = './data/flights.csv'
+data_path = '../data/flights.csv'
 
 
 @app.get('/request')
