@@ -80,14 +80,4 @@ export class RequestCardComponent implements OnInit{
     }
 
  displayedColumns: string[] = ['origin', 'destination'];
-
-
-    // TODO: move to unit testing and add native input
-    // // getParameters() {
-    // //   let station = this.station
-    // //   let requestType = this.requestType
-
-    // //   console.log(station)
-    // //   console.log(requestType)
-    // }
 }
